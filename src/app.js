@@ -11,6 +11,7 @@ const morgan = require('./config/morgan');
 const { jwtStrategy } = require('./config/passport');
 const { authLimiter } = require('./middlewares/rateLimiter');
 const routes = require('./routes/v1');
+const v2 = require('./routes/v2');
 const { errorConverter, errorHandler } = require('./middlewares/error');
 const ApiError = require('./utils/ApiError');
 
@@ -52,6 +53,9 @@ if (config.env === 'production') {
 
 // v1 api routes
 app.use('/v1', routes);
+
+// v2 api routes
+app.use('/v2', v2);
 
 // send back a 404 error for any unknown api request
 app.use((req, res, next) => {

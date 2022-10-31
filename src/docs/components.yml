@@ -47,6 +47,17 @@ components:
         message:
           type: string
 
+    KeyValuePair:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      example:
+        key: something
+        value: value for something
+
   responses:
     DuplicateEmail:
       description: Email already taken

@@ -5,7 +5,7 @@ const { decodeZipcode } = require('../connectors/zipcode');
 const getZipCodeDetails = catchAsync(async (req, res) => {
   const { zipCode } = req.params;
 
-  const result = [];
+  const results = [];
 
   const response = await decodeZipcode(zipCode);
   const $ = load(response.data);
@@ -13,18 +13,18 @@ const getZipCodeDetails = catchAsync(async (req, res) => {
   // Table Head
   const tHeader = $('.table > thead > tr > th');
   tHeader.toArray().forEach(({ children }) => {
-    result.push({ key: children[0].data.split('\n')[1].trim() });
+    results.push({ key: children[0].data.split('\n')[1].trim() });
   });
 
   // Table Body
   const tBody = $('.table > tbody > tr > td > a');
   tBody.toArray().forEach((col, index) => {
     col.children.forEach(({ data }) => {
-      result[index].value = data;
+      results[index].value = data;
     });
   });
 
-  res.send(result);
+  res.send({ results });
 });
 
 module.exports = {

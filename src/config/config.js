@@ -24,6 +24,7 @@ const envVarsSchema = Joi.object()
     SMTP_PASSWORD: Joi.string().description('password for email server'),
     EMAIL_FROM: Joi.string().description('the from field in the emails sent by the app'),
     CLIENT_DEBUG: Joi.string().default('false'),
+    BASE_URL: Joi.string().description('API Base URL').optional(),
   })
   .unknown();
 
@@ -63,4 +64,5 @@ module.exports = {
     from: envVars.EMAIL_FROM,
   },
   clientDebug: envVars.CLIENT_DEBUG === 'true',
+  baseUrl: envVars.BASE_URL,
 };
